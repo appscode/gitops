@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ace-user-roles
+  namespace: argocd
+spec:
+  destination:
+    namespace: kubeops
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: ace-user-roles
+    helm:
+      values: |
+        enableClusterRoles:
+          ace: false
+          appcatalog: true
+          catalog: false
+          cert-manager: false
+          kubedb: true
+          kubedb-ui: false
+          kubestash: true # enable if used
+          kubevault: true # enable if used
+          license-proxyserver: true
+          metrics: true
+          prometheus: false
+          stash: true # enable if used
+        annotations:
+          "helm.sh/hook": null
+          "helm.sh/hook-delete-policy": null
+    repoURL: ghcr.io/appscode-charts
+    targetRevision: v2024.9.30
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
