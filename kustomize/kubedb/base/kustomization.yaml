@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ns-kubedb.yaml
+
+helmCharts:
+- name: kubedb
+  includeCRDs: true
+  valuesInline:
+    ace-user-roles:
+      enabled: false
+  releaseName: kubedb
+  namespace: kubedb
+  version: v2025.2.19
+  repo: oci://ghcr.io/appscode-charts
