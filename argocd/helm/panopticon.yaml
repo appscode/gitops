@@ -1,21 +1,27 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kubestash
+  name: panopticon
   namespace: argocd
 spec:
   project: default
   source:
-    chart: kubestash
+    chart: panopticon
     repoURL: ghcr.io/appscode-charts
-    targetRevision: v2025.2.10
+    targetRevision: v2024.11.8
     helm:
       values: |
         ace-user-roles:
           enabled: false
+        monitoring:
+          agent: prometheus.io/operator
+          enabled: true
+          serviceMonitor:
+            labels:
+              release: kube-prometheus-stack
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: kubestash
+    namespace: monitoring
   syncPolicy:
     automated: {}
     syncOptions:
@@ -25,17 +31,16 @@ spec:
   - jsonPointers:
     - /data
     kind: Secret
-    name: kubestash-kubestash-operator-webhook-cert
-    namespace: kubestash
-  - group: apps
-    kind: Deployment
-    name: kubestash-kubestash-operator-operator
-    namespace: kubestash
+    name: panopticon-apiserver-cert
+    namespace: monitoring
+  - group: apiregistration.k8s.io
+    kind: APIService
+    name: v1alpha1.validators.metrics.appscode.com
     jsonPointers:
-    - /spec/template/metadata/annotations/checksum~1apiregistration.yaml
+    - /spec/caBundle
   - group: apps
     kind: Deployment
-    name: kubestash-kubestash-operator-webhook-server
-    namespace: kubestash
+    name: panopticon
+    namespace: monitoring
     jsonPointers:
     - /spec/template/metadata/annotations/checksum~1apiregistration.yaml
