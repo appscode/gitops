@@ -24,12 +24,14 @@ spec:
           license-proxyserver: true
           metrics: true
           prometheus: false
+          secrets-store: false
           stash: true # enable if used
+          virtual-secrets: false
         annotations:
           "helm.sh/hook": null
           "helm.sh/hook-delete-policy": null
     repoURL: ghcr.io/appscode-charts
-    targetRevision: v2024.9.30
+    targetRevision: v2025.3.14
   syncPolicy:
     automated: {}
     syncOptions:

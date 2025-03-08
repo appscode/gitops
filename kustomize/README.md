@@ -25,7 +25,7 @@ APP_HOME=kubedb kustomizeIt base
 APP_HOME=kubeops kustomizeIt base
 APP_HOME=kubestash kustomizeIt base
 APP_HOME=kubevault kustomizeIt base
-APP_HOME=panoticon kustomizeIt base
+APP_HOME=panopticon kustomizeIt base
 APP_HOME=stash kustomizeIt base
 ```
 
