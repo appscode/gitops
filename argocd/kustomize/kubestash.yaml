@@ -19,17 +19,17 @@ spec:
   - jsonPointers:
     - /data
     kind: Secret
-    name: kubestash-kubestash-operator-webhook-cert
+    name: kubestash-kubestash-operator-cert
     namespace: kubestash
   - group: apps
     kind: Deployment
     name: kubestash-kubestash-operator-operator
     namespace: kubestash
     jsonPointers:
-    - /spec/template/metadata/annotations/checksum~1apiregistration.yaml
+    - /spec/template/metadata/annotations/reload
   - group: apps
     kind: Deployment
     name: kubestash-kubestash-operator-webhook-server
     namespace: kubestash
     jsonPointers:
-    - /spec/template/metadata/annotations/checksum~1apiregistration.yaml
+    - /spec/template/metadata/annotations/reload

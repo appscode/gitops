@@ -8,7 +8,7 @@ spec:
   source:
     chart: license-proxyserver
     repoURL: ghcr.io/appscode-charts
-    targetRevision: v2025.1.17
+    targetRevision: v2025.3.14
     helm:
       values: |
         platform:
