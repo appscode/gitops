@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: v0.0.17
+appVersion: v0.0.18
 dependencies:
 - condition: ace-user-roles.enabled
   name: ace-user-roles

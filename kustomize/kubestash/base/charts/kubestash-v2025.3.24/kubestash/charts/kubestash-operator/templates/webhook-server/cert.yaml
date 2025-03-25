@@ -1,0 +1,18 @@
+{{ template "kubestash-operator.prepare-certs" $ }}
+
+{{- if or .Values.apiserver.enableMutatingWebhook .Values.apiserver.enableValidatingWebhook }}
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "kubestash-operator.fullname" . }}-cert
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "kubestash-operator.labels" . | nindent 4 }}
+type: kubernetes.io/tls
+data:
+  ca.crt: {{ $._caCrt }}
+  tls.crt: {{ $._serverCrt }}
+  tls.key: {{ $._serverKey }}
+
+{{- end }}
