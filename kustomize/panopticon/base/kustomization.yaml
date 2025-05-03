@@ -18,7 +18,7 @@ helmCharts:
           release: kube-prometheus-stack
   releaseName: panopticon
   namespace: monitoring
-  version: v2025.3.14
+  version: v2025.4.30
   repo: oci://ghcr.io/appscode-charts
 
 patches:

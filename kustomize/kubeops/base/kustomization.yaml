@@ -13,7 +13,7 @@ helmCharts:
       token: '****************************************'
   releaseName: license-proxyserver
   namespace: kubeops
-  version: v2025.3.14
+  version: v2025.4.30
   repo: oci://ghcr.io/appscode-charts
 
 - name: ace-user-roles
