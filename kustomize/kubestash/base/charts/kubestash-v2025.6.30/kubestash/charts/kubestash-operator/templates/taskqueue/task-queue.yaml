@@ -1,0 +1,21 @@
+{{- if eq (include "operator.enableTaskQueue" . | trim) "true" }}
+apiVersion: batch.k8s.appscode.com/v1alpha1
+kind: TaskQueue
+metadata:
+  name: appscode-kubestash-task-queue
+  labels:
+    {{- include "kubestash-operator.labels" . | nindent 4 }}
+spec:
+  maxConcurrentTasks: {{ include "operator.maxConcurrentSessions" . }}
+  tasks:
+    - type:
+        kind: BackupSession
+        group: core.kubestash.com
+      rules:
+        success: "has(self.status.phase) && self.status.phase == 'Succeeded'"
+        inProgress: "has(self.status.phase) && self.status.phase == 'Running'"
+        failed: "has(self.status.phase) && self.status.phase == 'Failed'"
+{{- end }}
+
+
+
