@@ -44,3 +44,9 @@ spec:
     namespace: monitoring
     jsonPointers:
     - /spec/template/metadata/annotations/checksum~1apiregistration.yaml
+  - group: apiextensions.k8s.io
+    kind: CustomResourceDefinition
+    name: servicemonitors.monitoring.coreos.com
+    jsonPointers:
+    - /metadata/annotations
+    - /spec
