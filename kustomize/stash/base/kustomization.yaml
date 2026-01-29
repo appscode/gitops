@@ -15,5 +15,5 @@ helmCharts:
       enterprise: true
   releaseName: stash
   namespace: stash
-  version: v2025.6.30
+  version: v2025.10.17
   repo: oci://ghcr.io/appscode-charts

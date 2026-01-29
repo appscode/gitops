@@ -1,0 +1,124 @@
+# Default values for kubestash.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# This is to override the chart name.
+nameOverride: ""
+fullnameOverride: ""
+
+global:
+  # License for the product.
+  # Get a license by following the steps from [here](https://kubestash.com/docs/latest/setup/install/enterprise#get-a-trial-license).
+  # Example:
+  # helm install appscode/kubestash \
+  #   --set-file global.license=/path/to/license/file
+  # or
+  # helm install appscode/kubestash \
+  #   --set global.license=<license file content>
+  license: ""
+  # Docker registry used to pull Stash operator image
+  registry: ""
+  # Docker registry fqdn used to pull Stash related images.
+  # Set this to use docker registry hosted at ${registryFQDN}/${registry}/${image}
+  registryFQDN: ""
+  # Specify an array of imagePullSecrets.
+  # Secrets must be manually created in the namespace.
+  #
+  # Example:
+  # helm template charts/kubestash \
+  #   --set global.imagePullSecrets[0].name=sec0 \
+  #   --set global.imagePullSecrets[1].name=sec1
+  imagePullSecrets: []
+  # Skip generating cleaner job YAML
+  skipCleaner: false
+  # TaskQueue feature maintains a concurrent Queue pool of Backup or restore sessions
+  taskQueue:
+    ## Enable Task Queue feature maintains a concurrent Queue pool of BackupSessions,
+    ## User can provide a predefined number of max concurrent BackupSessions can run at a time.
+    enabled: false
+    # It'll be applicable only If the EnableTaskQueue=true. It defines the Max concurrent BackupSessions that can run at a time.
+    maxConcurrentSessions: 10
+  # Controls the network policy creation
+  networkPolicy:
+    enabled: false
+  distro:
+    # Set true, if installed in OpenShift
+    openshift: false
+    # Set operator or all to use ubi images
+    ubi: ""
+
+# Pass values to kubestash-operator chart
+kubestash-operator:
+  enabled: true
+kubestash-catalog:
+  enabled: true
+kubestash-metrics:
+  enabled: true
+ace-user-roles:
+  # If enabled, installs the ace-user-roles chart
+  enabled: true
+  enableClusterRoles:
+    ace: false
+    appcatalog: true
+    catalog: false
+    cert-manager: false
+    kubedb-ui: false
+    kubedb: false
+    kubestash: true
+    kubevault: false
+    license-proxyserver: true
+    metrics: true
+    prometheus: false
+    secrets-store: false
+    stash: false
+    virtual-secrets: false
+
+# Docker registry fqdn used to pull KubeDB related images
+# Set this to use docker registry hosted at ${registryFQDN}/${registry}/${image}
+registryFQDN: ghcr.io
+tester:
+  # Docker registry used to pull KubeDB enterprise kubectl-nonroot image
+  registry: appscode
+  # KubeDB enterprise kubectl-nonroot container image
+  repository: kubectl-nonroot
+  # KubeDB enterprise kubectl-nonroot container image tag
+  tag: "1.34"
+  # Security options this container should run with
+  securityContext:  # +doc-gen:break
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 65534
+    seccompProfile:
+      type: RuntimeDefault
+  # Compute Resources required by this container
+  resources: {}
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# Specify an array of imagePullSecrets.
+# Secrets must be manually created in the namespace.
+#
+# Example:
+# helm template charts/kubedb-autoscaler \
+#   --set imagePullSecrets[0].name=sec0 \
+#   --set imagePullSecrets[1].name=sec1
+imagePullSecrets: []
+# Container image pull policy
+imagePullPolicy: IfNotPresent
+
+# This is for setting Kubernetes Labels to a Pod.
+# For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

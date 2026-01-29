@@ -13,5 +13,5 @@ helmCharts:
       enabled: false
   releaseName: kubestash
   namespace: kubestash
-  version: v2025.7.31
+  version: v2026.1.19
   repo: oci://ghcr.io/appscode-charts

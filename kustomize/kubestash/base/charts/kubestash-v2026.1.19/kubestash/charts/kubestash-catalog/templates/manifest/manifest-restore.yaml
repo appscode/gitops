@@ -1,0 +1,24 @@
+{{ $ubi := .Values.distro.ubi }}
+{{- if .Values.global }}
+  {{ $ubi = default .Values.distro.ubi .Values.global.distro.ubi }}
+{{- end }}
+
+{{ if and .Values.manifest.enabled (not (eq $ubi "operator")) }}
+apiVersion: addons.kubestash.com/v1alpha1
+kind: Function
+metadata:
+  name: 'manifest-restore'
+  labels:
+    {{- include "kubestash-catalog.labels" . | nindent 4 }}
+spec:
+  args:
+  - restore
+  - --namespace=${namespace:=default}
+  - --restoresession=${restoreSession:=}
+  - --snapshot=${snapshot:=}
+  - --enable-cache=${enableCache:=}
+  - --scratch-dir=${scratchDir:=}
+  - --include-rbac-resources=${includeRBACResources:=}
+  - --override-resources=${overrideResources:=}
+  image: '{{ include "image.ghcr" (merge (dict "_repo" "kubestash/manifest") $) }}:v0.15.0{{ include "catalog.ubi" $ }}'
+{{ end }}
