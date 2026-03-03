@@ -39,3 +39,14 @@ spec:
     namespace: kubestash
     jsonPointers:
     - /spec/template/metadata/annotations/reload
+
+  - group: admissionregistration.k8s.io
+    kind: MutatingWebhookConfiguration
+    name: kubestash-kubestash-operator
+    jqPathExpressions:
+      - .webhooks[].clientConfig.caBundle
+  - group: admissionregistration.k8s.io
+    kind: ValidatingWebhookConfiguration
+    name: kubestash-kubestash-operator
+    jqPathExpressions:
+      - .webhooks[].clientConfig.caBundle
