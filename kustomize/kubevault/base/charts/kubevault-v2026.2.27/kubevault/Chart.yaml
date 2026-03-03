@@ -1,0 +1,37 @@
+annotations:
+  charts.openshift.io/name: kubevault
+apiVersion: v2
+appVersion: v2026.2.27
+dependencies:
+- condition: kubevault-crds.enabled
+  name: kubevault-crds
+  repository: file://../kubevault-crds
+  version: v2026.2.27
+- condition: kubevault-catalog.enabled
+  name: kubevault-catalog
+  repository: file://../kubevault-catalog
+  version: v2026.2.27
+- condition: kubevault-operator.enabled
+  name: kubevault-operator
+  repository: file://../kubevault-operator
+  version: v0.24.0
+- condition: kubevault-webhook-server.enabled
+  name: kubevault-webhook-server
+  repository: file://../kubevault-webhook-server
+  version: v0.24.0
+- condition: ace-user-roles.enabled
+  name: ace-user-roles
+  repository: oci://ghcr.io/appscode-charts
+  version: v2025.3.14
+description: KubeVault by AppsCode - HashiCorp Vault operator for Kubernetes
+home: https://kubevault.com
+icon: https://cdn.appscode.com/images/products/kubevault/kubevault-icon.png
+kubeVersion: '>=1.28.0-0'
+maintainers:
+- email: support@appscode.com
+  name: appscode
+name: kubevault
+sources:
+- https://github.com/kubevault
+type: application
+version: v2026.2.27

@@ -1,0 +1,15 @@
+annotations:
+  charts.openshift.io/name: kubestash-operator
+apiVersion: v1
+appVersion: v0.26.0
+description: KubeStash, Kubernetes native backup operator by AppsCode
+home: https://kubestash.com/
+icon: https://cdn.appscode.com/images/products/stash/kubestash-operator-icon.png
+kubeVersion: '>=1.28.0-0'
+maintainers:
+- email: support@appscode.com
+  name: appscode
+name: kubestash-operator
+sources:
+- https://github.com/stashed
+version: v0.26.0

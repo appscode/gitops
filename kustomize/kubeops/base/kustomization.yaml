@@ -13,7 +13,7 @@ helmCharts:
       token: '****************************************'
   releaseName: license-proxyserver
   namespace: kubeops
-  version: v2026.1.15
+  version: v2026.2.16
   repo: oci://ghcr.io/appscode-charts
 
 - name: ace-user-roles
@@ -39,7 +39,7 @@ helmCharts:
       "helm.sh/hook-delete-policy": null
   releaseName: ace-user-roles
   namespace: kubeops
-  version: v2025.3.14
+  version: v2026.2.16
   repo: oci://ghcr.io/appscode-charts
 
 patches:

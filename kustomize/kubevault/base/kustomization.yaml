@@ -12,5 +12,5 @@ helmCharts:
       enabled: false
   releaseName: kubevault
   namespace: kubevault
-  version: v2025.11.21
+  version: v2026.2.27
   repo: oci://ghcr.io/appscode-charts

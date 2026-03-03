@@ -1,0 +1,51 @@
+properties:
+  distro:
+    properties:
+      openshift:
+        type: boolean
+      ubi:
+        enum:
+        - all
+        - catalog
+        - operator
+        type: string
+    required:
+    - openshift
+    - ubi
+    type: object
+  fullnameOverride:
+    type: string
+  nameOverride:
+    type: string
+  proxies:
+    properties:
+      appscode:
+        description: r.appscode.com
+        type: string
+      dockerHub:
+        description: company/bin:1.23
+        type: string
+      dockerLibrary:
+        description: alpine, nginx etc.
+        type: string
+      ghcr:
+        description: ghcr.io
+        type: string
+      kubernetes:
+        description: registry.k8s.io
+        type: string
+      microsoft:
+        description: mcr.microsoft.com
+        type: string
+      quay:
+        description: quay.io
+        type: string
+      weaviate:
+        description: cr.weaviate.io
+        type: string
+    type: object
+  skipDeprecated:
+    type: boolean
+required:
+- skipDeprecated
+type: object
